@@ -20,9 +20,15 @@
     <meta property="og:url" content="">
     <meta property="og:site_name" content="Digital Standards | City of Philadelphia">
     <meta property="og:image" content="https://beta.phila.gov/media/20160715133810/phila-gov.jpg">
+    <style type="text/css">
+        .auto-style1 {
+            height: 23px;
+        }
+    </style>
 </head>
 
 <body lang="en">
+    <form id="form1" runat="server">
     <div id="application">
         <!-- Begin header -->
         <header class="site-header app group">
@@ -98,34 +104,35 @@
                             <div class="row">
                                 <div class="columns medium-12">
                                     <h2 class="contrast">Search by First or Last Name</h2>
-                                    <form>
                                         <label for="input-fname">First Name</label>
 
-                                        <input name="input-fname" id="input-fname" type="text" placeholder="Enter a name to search">
+                                       <%-- <input name="input-fname" id="input-fname" type="text" placeholder="Enter a name to search">--%>
+                                    <asp:TextBox ID="txtFname" runat="server"></asp:TextBox>
 
                                         <label for="input-lname">Last Name</label>
 
 
-                                        <input name="input-lname" id="input-lname" type="text" placeholder="Enter a name to search">
+<%--                                        <input name="input-lname" id="input-lname" type="text" placeholder="Enter a name to search">--%>
+                                     <asp:TextBox ID="txtLname" runat="server"></asp:TextBox>
 
                                         <div class="app-buttons">
-                                            <a href="#" class="button">SEARCH</a>
-                                            <a href="#" class="button">RESET</a>
+                                          
+                                            <asp:Button ID="searchButton" runat="server" Text="SEARCH" class="button"/>
+                                           <asp:Button ID="rstButton" runat="server" Text="RESET" class="button" OnClick="rstButton_Click"/>
                                         </div>
-                                    </form>
 
 
                                 </div>
                                 <div class="columns medium-12">
                                     <h2 class="contrast">Search by Department Name</h2>
-                                    <form>
                                         <label for="dropdd-department">Department</label>
 
-                                        <select id="dropdd-department" name="select">
-                                            <option value="all-department">All Department</option>
-                                            <option value="spacely-sprockets">Spacely Sprockets</option>
-                                            <option value="mystery-machine">Mystery Machine</option>
-                                        </select>
+                                    
+                                    <asp:DropDownList ID="dropddDepartment" runat="server" AutoPostBack="true" OnSelectedIndexChanged="dropddDepartment_SelectedIndexChanged">
+                                        <asp:ListItem  Text="All Department" Value="AllDepartment"></asp:ListItem>
+                                         <asp:ListItem  Text="Spacely Sprockets" Value="SpacelySprockets"></asp:ListItem>
+                                           <asp:ListItem  Text="Mystery Machine" Value="MysteryMachine"></asp:ListItem>
+                                        </asp:DropDownList>
 
 
                                         <label for="dropdd-unit">Unit</label>
@@ -135,14 +142,13 @@
 
                                         </select>
 
-                                    </form>
-
-
+                                    
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="columns medium-24">
-                                    <h2 class="mtn hide-for-small-only">Search Instructions</h2>
+                                    <h2 class="mtn hide-for-small-only">Search Instructions
+                                    </h2>
 
                                     <p>
                                         Welcome to the City of Philadelphia Phone Directory. This section allows you to search for the contact information of any of our employees. Enter an employee’s first or last name and click “search”, or select a department from the list.
@@ -151,7 +157,8 @@ You may also search by first initial if you do not know the exact spelling of a 
 
 For general information, please contact (215) 686-1776.
                                     </p>
-
+                                    <asp:Table ID="Table1" runat="server" Visible="true"></asp:Table>
+                                
                                 </div>
 
                             </div>
@@ -182,6 +189,8 @@ For general information, please contact (215) 686-1776.
         </div>
     </div>
     <!-- #application -->
+
+    </form>
 
 </body>
 
